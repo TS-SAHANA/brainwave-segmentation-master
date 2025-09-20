@@ -2,39 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Medical Brain Tumor Segmentation Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Medical Background System */
+    --background: 218 27% 96%;
+    --foreground: 215 28% 17%;
 
+    /* Medical Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 28% 17%;
 
+    /* Medical Interface Elements */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 28% 17%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Medical Primary - Deep Medical Blue */
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 213 94% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Medical Secondary - Clinical Gray */
+    --secondary: 218 11% 92%;
+    --secondary-foreground: 215 28% 17%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Medical Muted Tones */
+    --muted: 218 11% 95%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Medical Accent - Diagnostic Green */
+    --accent: 142 76% 73%;
+    --accent-foreground: 142 84% 12%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Medical Alert - Tumor Warning */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Medical Borders & Inputs */
+    --border: 218 20% 88%;
+    --input: 218 20% 88%;
+    --ring: 213 94% 68%;
+
+    /* Medical Specific Colors */
+    --medical-scan: 205 100% 6%;
+    --medical-tumor: 0 91% 71%;
+    --medical-healthy: 142 69% 58%;
+    --medical-process: 213 94% 68%;
+    --medical-success: 142 76% 36%;
+    --medical-warning: 38 92% 50%;
+
+    /* Medical Gradients */
+    --gradient-medical: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-scan: linear-gradient(180deg, hsl(var(--medical-scan)), hsl(215 100% 12%));
+    --gradient-analysis: linear-gradient(45deg, hsl(var(--accent)), hsl(var(--medical-success)));
+
+    /* Medical Shadows */
+    --shadow-medical: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-scan: 0 8px 25px -8px hsl(var(--medical-scan) / 0.4);
+    --shadow-result: 0 12px 35px -12px hsl(var(--medical-tumor) / 0.15);
+
+    /* Medical Animations */
+    --transition-medical: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-scan: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 
@@ -101,5 +131,44 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Medical Interface Components */
+  .medical-scan-viewer {
+    @apply bg-gradient-to-br from-medical-scan to-slate-900 rounded-xl;
+    box-shadow: var(--shadow-scan);
+    transition: var(--transition-scan);
+  }
+  
+  .medical-result-card {
+    @apply bg-card border-2 border-border rounded-xl p-6;
+    box-shadow: var(--shadow-result);
+    transition: var(--transition-medical);
+  }
+  
+  .medical-processing {
+    @apply bg-gradient-to-r from-primary to-primary-glow rounded-full;
+    animation: pulse-medical 2s infinite;
+  }
+  
+  .tumor-highlight {
+    @apply text-destructive font-semibold;
+  }
+  
+  .healthy-tissue {
+    @apply text-accent;
+  }
+
+  @keyframes pulse-medical {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+  
+  @keyframes scan-analyze {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
   }
 }
